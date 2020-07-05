@@ -4,14 +4,11 @@ import logo from './img/transparentLogo.png';
 import firebase from 'firebase';
 
 export default class EntryScreen extends React.Component {
-
-
-        state = {
-            name: '',
-            age: '',
-            hairColor: '',
-        }    
-
+    state = {
+        name: '',
+        age: '',
+        hairColor: '',
+    }    
 
     handleName = (text) => {
         this.setState({name: text})
@@ -39,8 +36,6 @@ export default class EntryScreen extends React.Component {
         })
     }
 
-
-
     render() {
         return (
             <View style={styles.container}>
@@ -53,7 +48,7 @@ export default class EntryScreen extends React.Component {
                 <TextInput style={styles.textInput} placeholder="Hair Color" placeholderTextColor='#ABABAB' onChangeText = {this.handleHairColor} />
                 <View style={styles.submitButton}>
                     <Button
-                        title='Submit'
+                        title='Enter'
                         onPress={() => this.uploadData(this.state.name, this.state.age, this.state.hairColor)}
                     />
                 </View>
@@ -89,4 +84,4 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
 
-})
+});

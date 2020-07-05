@@ -5,38 +5,7 @@ import logo from './img/transparentLogo.png';
 export default class WelcomeScreen extends React.Component {
     render() {
         return (
-            /*<View style={styles.container}>
 
-                <View style={styles.buttonRow}>
-                    <View style={styles.buttonStyle}>
-                        <Button
-                            title='New Entry'
-                            onPress={() => this.props.navigation.navigate('EntryLog')}
-
-                        />
-                    </View>
-                    <View style={styles.buttonStyle}>
-                        <Button
-                            title='2nd feature'
-                            style={styles.buttonStyle}
-                        />
-                    </View>
-                </View>
-                <View style={styles.buttonRow}>
-                    <View style={styles.buttonStyle}>
-                        <Button
-                            title='3rd feature'
-                            style={styles.buttonStyle}
-                        />
-                    </View>
-                    <View style={styles.buttonStyle}>
-                        <Button
-                            title='4th feature'
-                            style={styles.buttonStyle}
-                        />
-                    </View>
-                </View> 
-            </View>*/
             <View style={styles.container}>
 
                 <Image source={logo} style={styles.logoImg} />
@@ -50,22 +19,24 @@ export default class WelcomeScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonStyle}
+                        onPress={() => this.props.navigation.navigate('ViewLog')}
                     >
-                        <Text>Another Feature</Text>
+                        <Text>View Entries</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.buttonRow}>
                     <TouchableOpacity
                         style={styles.buttonStyle}
-                        onPress={() => this.props.navigation.navigate('EntryLog')}
+                        onPress={() => this.props.navigation.navigate('FindLog')}
                     >
-                        <Text>New Entry</Text>
+                        <Text>Update Entry</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonStyle}
+                        //onPress={() => this.props.navigation.navigate('Scanner')}
                     >
-                        <Text>Another Feature</Text>
+                        <Text>Camera</Text>
                     </TouchableOpacity>
                 </View>
             </View>
