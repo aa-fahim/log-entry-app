@@ -29,6 +29,7 @@ export default class ViewScreen extends React.Component {
         dataVal = dataVal.toJSON()
         console.log(dataVal);
 
+        // for debugging purposes, for when I want to focus on changing something solely on this screen
         /*var dataVal = {
             name: "Fahim",
             age: 24,
@@ -41,9 +42,9 @@ export default class ViewScreen extends React.Component {
                 <Text style={styles.header}>
                     Make your updates
                 </Text>
-                <TextInput style={styles.textInput} placeholder={dataVal.name} placeholderTextColor='#ABABAB' onChangeText={this.handleName} />
-                <TextInput style={styles.textInput} placeholder={dataVal.age} placeholderTextColor='#ABABAB' onChangeText={this.handleAge} />
-                <TextInput style={styles.textInput} placeholder={dataVal.hairColor} placeholderTextColor='#ABABAB' onChangeText={this.handleHairColor} />
+                <TextInput style={styles.textInput} placeholder={dataVal.name} placeholderTextColor='black' onChangeText={this.handleName} />
+                <TextInput style={styles.textInput} placeholder={dataVal.age} placeholderTextColor='black' onChangeText={this.handleAge} />
+                <TextInput style={styles.textInput} placeholder={dataVal.hairColor} placeholderTextColor='black' onChangeText={this.handleHairColor} />
                 <View style={styles.buttonsRow}>
                     <View style = {styles.buttonStyle}>
                         <Button
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
 
     textInput: {
         marginVertical: 10,
+        color: '#DC9797',
     },
 
     buttonsRow: {

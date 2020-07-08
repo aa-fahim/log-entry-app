@@ -2,6 +2,12 @@ Implement features:
     - View all entires in grid format (is this even possible? so many questions)
         - What happens if theres too many features, would have to scroll screen sideways to see all of them (name, age, hair is only 3 but what happens if there's more)
         - Possibly infinite amount of entires, so would have to scroll the screen vertically, this causes performance issues too if theres too much data
-    - Add barcode camera (just add camera for now, wait for further instructions from Warren)
+    - Add barcode camera (just add camera for now, wait for further instructions from Warren), added but does not load
     - Make submit button nicer (same one is used across all screens as of now, so make a component)
-    - In ViewLogScreen, make TextInput placeholder texts darker so it looks like they are filled in already when you would normally fill them in, in other screens
+    - Switch to SQL database
+    - Implement tab feature (maybe later actually)
+    - I think alerts crashes ios, also if entry has less features than indicated textinputs, makes it crash as well
+
+NPM RUN DEV TO START SERVER
+Tutorial that helped me build the RESTful APIs, extremely useful
+https://bezkoder.com/node-js-rest-api-express-mysql/#Application_overview

@@ -23,7 +23,7 @@ export default class EntryScreen extends React.Component {
     }
 
     uploadData = (nameVal, ageVal, hairColorVal) => {
-        firebase.database().ref('users/'+nameVal+'').set(
+        /*firebase.database().ref('users/'+nameVal+'').set(
             {
                 name: nameVal,
                 age: ageVal,
@@ -33,7 +33,8 @@ export default class EntryScreen extends React.Component {
             console.log('INSERTED');
         }).catch((error) =>{
             console.log(error);
-        })
+        })*/
+
     }
 
     render() {
