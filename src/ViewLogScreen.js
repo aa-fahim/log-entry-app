@@ -11,7 +11,7 @@ export default class ViewScreen extends React.Component {
     }
 
     handleAge = (text) => {
-        this.setState({age: text})
+        this.setState({age: Number(text)})
     }
 
     handleHairColor = (text) => {
@@ -19,16 +19,40 @@ export default class ViewScreen extends React.Component {
     }
 
     updateData = (nameVal) => {
-        firebase.database().ref('users/'+nameVal+'/').set(
-            this.state
+
+        console.log(this.state)
+        let response = fetch('http://localhost:3000/users/'+nameVal+'', {
+            method: 'PUT',
+            body: JSON.stringify(this.state),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then(res => 
+            res.json()
+        ).then(res =>
+            this.props.navigation.navigate('FindLog')
         );
+
+        /*firebase.database().ref('users/'+nameVal+'/').set(
+            this.state
+        );*/
+    }
+
+    deleteUser = (nameVal) => {
+
+        fetch('http://localhost:3000/users/'+nameVal+'', {
+            method: 'DELETE'
+        }).then(res => 
+            res.json()
+        ).then(res =>
+            this.props.navigation.navigate('FindLog')
+        );
+
     }
 
     render() {
         var { dataVal } = this.props.route.params
-        dataVal = dataVal.toJSON()
-        console.log(dataVal);
-
         // for debugging purposes, for when I want to focus on changing something solely on this screen
         /*var dataVal = {
             name: "Fahim",
@@ -43,7 +67,7 @@ export default class ViewScreen extends React.Component {
                     Make your updates
                 </Text>
                 <TextInput style={styles.textInput} placeholder={dataVal.name} placeholderTextColor='black' onChangeText={this.handleName} />
-                <TextInput style={styles.textInput} placeholder={dataVal.age} placeholderTextColor='black' onChangeText={this.handleAge} />
+                <TextInput style={styles.textInput} placeholder={dataVal.age.toString()} placeholderTextColor='black' onChangeText={this.handleAge} />
                 <TextInput style={styles.textInput} placeholder={dataVal.hairColor} placeholderTextColor='black' onChangeText={this.handleHairColor} />
                 <View style={styles.buttonsRow}>
                     <View style = {styles.buttonStyle}>
@@ -69,10 +93,7 @@ export default class ViewScreen extends React.Component {
                                 Alert.alert(
                                     'Are you sure you want to delete',
                                     [
-                                        {text: 'Yes', onPress: () => (
-                                            firebase.database().ref('users/'+dataVal.name+'').remove(),
-                                            this.props.navigation.navigate('FindLog'))
-                                        },
+                                        {text: 'Yes', onPress: () => this.deleteUser(dataVal.name)},
                                         {text: 'No'}
                                     ]
                                 )}

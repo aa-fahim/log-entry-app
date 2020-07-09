@@ -23,17 +23,30 @@ export default class EntryScreen extends React.Component {
     }
 
     uploadData = (nameVal, ageVal, hairColorVal) => {
-        /*firebase.database().ref('users/'+nameVal+'').set(
-            {
-                name: nameVal,
-                age: ageVal,
-                hairColor: hairColorVal,
-            }
-        ).then(() => {
-            console.log('INSERTED');
-        }).catch((error) =>{
-            console.log(error);
-        })*/
+
+        let user = {
+            name: nameVal,
+            age : Number(ageVal),
+            hairColor : hairColorVal,
+        }
+        JSON.stringify(user)
+        console.log(user)
+
+        let response = fetch('http://localhost:3000/users/', {
+            method: 'POST',
+            body: JSON.stringify({
+                    name: nameVal,
+                    age : Number(ageVal),
+                    hairColor : hairColorVal,
+                
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then(res => 
+            this.props.navigation.navigate('Welcome')
+        );
 
     }
 

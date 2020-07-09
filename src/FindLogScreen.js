@@ -13,18 +13,15 @@ export default class FindScreen extends React.Component {
     }
 
     findData = (IdVal) => {
-        firebase.database().ref('users/' +IdVal+ '').once('value', (data) => {
-            if(data.toJSON() === null){
-                Alert.alert(
-                    'Entry not found',
-                    [
-                        {text: 'Ok'},
-                    ]
-                )
-            } else {
-                this.props.navigation.navigate('ViewLog', {dataVal: data } )
-            }
-        })
+
+        let response = fetch('http://localhost:3000/users/'+IdVal+'', {
+            method: 'GET',
+        }).then(res => 
+            res.json()
+        ).then(res =>
+            this.props.navigation.navigate('ViewLog', {dataVal: res})
+        );
+
     }
     
     render() {

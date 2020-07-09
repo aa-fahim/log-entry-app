@@ -17,7 +17,7 @@ User.create = (newUser, result) => {
       }
   
       console.log("created user: ", newUser);
-      result(null, newUser);//{ id: res.insertId, ...newUser });
+      result(null, newUser);
     });
 };
 
@@ -42,7 +42,7 @@ User.findByName = (userName, result) => {
 
 User.updateByName = (userName, user, result) => {
     sql.query(
-      "UPDATE users SET name = ?, age = ?, hairColor = ? WHERE name = ?",
+      "UPDATE users SET name = IfNull(?, name), age = IfNull(?, age), hairColor = IfNull(?, hairColor) WHERE name = ?",
       [user.name, user.age, user.hairColor, userName],
       (err, res) => {
         if (err) {

@@ -7,6 +7,7 @@ Implement features:
     - Switch to SQL database
     - Implement tab feature (maybe later actually)
     - I think alerts crashes ios, also if entry has less features than indicated textinputs, makes it crash as well
+    - Change from PUT to PATCH (put edits entire entry, whereas patch edits only partial parts of entry)
 
 NPM RUN DEV TO START SERVER
 Tutorial that helped me build the RESTful APIs, extremely useful

@@ -33,7 +33,7 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName='Welcome'
+          initialRouteName='FindLog'
           screenOptions={{
             headerShown: false
           }}
