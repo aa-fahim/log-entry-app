@@ -1,33 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import WelcomeScreen from './src/WelcomeScreen';
-import EntryLogScreen from './src/EntryLogScreen';
-import FindLogScreen from './src/FindLogScreen';
-import ViewLogScreen from './src/ViewLogScreen';
-import BarcodeScanner from './src/BarcodeScanner';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createStackNavigator();
+import FindLogStackScreen from './src/FindLogScreen/FindLogStackScreen';
+import EntryLogScreen from './src/EntryLogScreen/EntryLogScreen';
+import BarcodeScanner from './src/BarcodeScannerScreen/BarcodeScanner';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+const Tab = createBottomTabNavigator();
 
 export default class App extends React.Component {
 
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName='Welcome'
-          screenOptions={{
-            headerShown: false
+        <Tab.Navigator
+          tabBarOptions={{
+            activeTintColor: '#101010',
+            style: {
+              backgroundColor: '#39644f'
+            }
           }}
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ color, size }) => {
+              let iconName
+              if (route.name == 'EntryLog') {
+                iconName = 'ios-create'
+              } else if (route.name == 'FindLogStack') {
+                iconName = 'md-search'
+              } else if (route.name == 'Scanner') {
+                iconName = 'ios-barcode'
+              }
+              return <Ionicons name={iconName} color={color} size={size} />
+            }
+          })}
         >
-          <Stack.Screen name='Welcome' component={WelcomeScreen} />
-          <Stack.Screen name='EntryLog' component={EntryLogScreen} />
-          <Stack.Screen name='FindLog' component={FindLogScreen} />
-          <Stack.Screen name='ViewLog' component={ViewLogScreen} />
-          <Stack.Screen name='Scanner' component={BarcodeScanner} />
-        </Stack.Navigator>
+          <Tab.Screen
+            name='EntryLog'
+            component={EntryLogScreen}
+          />
+          <Tab.Screen
+            name='FindLogStack'
+            component={FindLogStackScreen}
+          />
+          <Tab.Screen
+            name='Scanner'
+            component={BarcodeScanner}
+          />
+        </Tab.Navigator>
       </NavigationContainer>
     )
   }

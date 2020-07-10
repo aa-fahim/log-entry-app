@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Image, TouchableOpacity } from 'react-native';
-import logo from './img/transparentLogo.png';
+import logo from '../img/transparentLogo.png';
 
 export default class WelcomeScreen extends React.Component {
     render() {
@@ -19,9 +19,9 @@ export default class WelcomeScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonStyle}
-                        onPress={() => this.props.navigation.navigate('ViewLog')}
+                        //onPress={() => this.props.navigation.navigate('ViewLog')}
                     >
-                        <Text>View Entries</Text>
+                        <Text>Extra feature space here</Text>
                     </TouchableOpacity>
                 </View>
 

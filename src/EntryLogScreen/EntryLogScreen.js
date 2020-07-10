@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, Text, TextInput, StyleSheet, Image, Container, TouchableOpacity } from 'react-native';
-import logo from './img/transparentLogo.png';
+import logo from '../img/transparentLogo.png';
 
 export default class EntryScreen extends React.Component {
     state = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
-import logo from './img/transparentLogo.png';
+import logo from '../img/transparentLogo.png';
 
 export default class ViewScreen extends React.Component {
     state = {}    
