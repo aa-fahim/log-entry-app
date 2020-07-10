@@ -2,12 +2,13 @@ Implement features:
     - View all entires in grid format (is this even possible? so many questions)
         - What happens if theres too many features, would have to scroll screen sideways to see all of them (name, age, hair is only 3 but what happens if there's more)
         - Possibly infinite amount of entires, so would have to scroll the screen vertically, this causes performance issues too if theres too much data
-    - Add barcode camera (just add camera for now, wait for further instructions from Warren), added but does not load
     - Make submit button nicer (same one is used across all screens as of now, so make a component)
-    - Switch to SQL database
     - Implement tab feature (maybe later actually)
-    - I think alerts crashes ios, also if entry has less features than indicated textinputs, makes it crash as well
-    - Change from PUT to PATCH (put edits entire entry, whereas patch edits only partial parts of entry)
+    - Added barcode scanner, works fine but does nothing with data read at this point
+    - If i decide to change something in viewlog then choose afterwards I don't want this change and leave field blank, then save changes, it will enter that change into the 
+    db making that value empty. Example, if I start changing hairColor to grey then choose not to and erase the grey text ive written so field is blank then choose to change 
+    age to 27. After saving changes, it will change the age to 27 but also change hairColor to empty. (my temporary solution to this was setting the variable to undefined,
+    which works completely fine but maybe check out if theres a way to remove variable from state object)
 
 NPM RUN DEV TO START SERVER
 Tutorial that helped me build the RESTful APIs, extremely useful

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
 import logo from './img/transparentLogo.png';
-import firebase from 'firebase';
 
 export default class FindScreen extends React.Component {
     state = {
@@ -13,15 +12,13 @@ export default class FindScreen extends React.Component {
     }
 
     findData = (IdVal) => {
-
-        let response = fetch('http://localhost:3000/users/'+IdVal+'', {
+        let response = fetch('http://192.168.2.33:3000/users/'+IdVal+'', {
             method: 'GET',
         }).then(res => 
             res.json()
         ).then(res =>
             this.props.navigation.navigate('ViewLog', {dataVal: res})
         );
-
     }
     
     render() {

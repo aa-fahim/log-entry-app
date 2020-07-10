@@ -1,27 +1,41 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
 import logo from './img/transparentLogo.png';
-import firebase from 'firebase';
 
 export default class ViewScreen extends React.Component {
     state = {}    
 
     handleName = (text) => {
-        this.setState({name: text})
+        if (text == "") {
+            this.setState({name: undefined})
+        } else {
+            this.setState({name: text})
+        }
+        console.log(this.state)
     }
 
     handleAge = (text) => {
-        this.setState({age: Number(text)})
+        if (text == "") {
+            this.setState({age: undefined})
+        } else {
+            this.setState({age: Number(text)})
+        }
+        console.log(this.state)
     }
 
     handleHairColor = (text) => {
-        this.setState({hairColor: text})
+        if (text == "") {
+            this.setState({hairColor: undefined})
+        } else {
+            this.setState({hairColor: text})
+        }
+        console.log(this.state)
     }
 
     updateData = (nameVal) => {
 
         console.log(this.state)
-        let response = fetch('http://localhost:3000/users/'+nameVal+'', {
+        let response = fetch('http://192.168.2.33:3000/users/'+nameVal+'', {
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers: {
@@ -34,14 +48,11 @@ export default class ViewScreen extends React.Component {
             this.props.navigation.navigate('FindLog')
         );
 
-        /*firebase.database().ref('users/'+nameVal+'/').set(
-            this.state
-        );*/
     }
 
     deleteUser = (nameVal) => {
 
-        fetch('http://localhost:3000/users/'+nameVal+'', {
+        fetch('http://192.168.2.33:3000/users/'+nameVal+'', {
             method: 'DELETE'
         }).then(res => 
             res.json()
@@ -76,6 +87,7 @@ export default class ViewScreen extends React.Component {
                             onPress={() => {
                                 (Object.keys(this.state).length === 0 && this.state.constructor === Object) ? 
                                     (Alert.alert(
+                                        'Warning',
                                         'No changes have been made!',
                                         [
                                             {text: 'Ok'},
@@ -91,7 +103,8 @@ export default class ViewScreen extends React.Component {
                             title='Delete'
                             onPress= {() => {
                                 Alert.alert(
-                                    'Are you sure you want to delete',
+                                    'Warning',
+                                    'Are you sure you want to delete?',
                                     [
                                         {text: 'Yes', onPress: () => this.deleteUser(dataVal.name)},
                                         {text: 'No'}

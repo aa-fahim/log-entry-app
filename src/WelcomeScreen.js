@@ -34,7 +34,7 @@ export default class WelcomeScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonStyle}
-                        //onPress={() => this.props.navigation.navigate('Scanner')}
+                        onPress={() => this.props.navigation.navigate('Scanner')}
                     >
                         <Text>Camera</Text>
                     </TouchableOpacity>

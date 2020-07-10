@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, View, Text, TextInput, StyleSheet, Image, Container, TouchableOpacity } from 'react-native';
 import logo from './img/transparentLogo.png';
-import firebase from 'firebase';
 
 export default class EntryScreen extends React.Component {
     state = {
@@ -24,15 +23,7 @@ export default class EntryScreen extends React.Component {
 
     uploadData = (nameVal, ageVal, hairColorVal) => {
 
-        let user = {
-            name: nameVal,
-            age : Number(ageVal),
-            hairColor : hairColorVal,
-        }
-        JSON.stringify(user)
-        console.log(user)
-
-        let response = fetch('http://localhost:3000/users/', {
+        let response = fetch('http://192.168.2.33:3000/users/', {
             method: 'POST',
             body: JSON.stringify({
                     name: nameVal,
