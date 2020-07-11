@@ -1,0 +1,35 @@
+SCOPE OF WORK
+A clear and concise description of what the problem is...
+Find a dealer to sell you a particular good, and when you no longer want it, that dealer will often buy it back
+
+SCOPE OF WORK
+A clear and concise description of what you want to happen...
+Have an competitive procurement strategy, and schedule average daily volume or marginal change every week, every Tuesday
+
+PHASE 1 DELIVERABLES
+Readiness Program
+
+- Entry Log, acts of countable entries
+- Identification Number, secures registration
+- Barcode Scanner, used for the product label 
+- Timesheet, clock entry and exit system 
+- Database, create and save a new user
+- Server, client-server model.js
+
+PHASE 2 DELIVERABLES
+Permit-to-work-system
+
+- Find broker @ AVJET
+- Request Term (DD / MM / YY)
+- Import Min limit and Export Max limit
+- Apply-for-a-building-permit on project basis
+
+PHASE 3 DELIVERABLES
+Development of a Construction plan – Group F (Industrial Occupancies)
+
+• 1,000 barrel contract unit
+• 4 drum per unit
+• 250 / L
+• Cost Structure x barrel = CU x P
+• CU = Contract Unit 
+• P = Drum unit in Litres 
