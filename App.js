@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FindLogStackScreen from './src/FindLogScreen/FindLogStackScreen';
 import EntryLogScreen from './src/EntryLogScreen/EntryLogScreen';
 import BarcodeScanner from './src/BarcodeScannerScreen/BarcodeScanner';
+import Timesheet from './src/TimesheetScreen/TimesheetScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,8 @@ export default class App extends React.Component {
                 iconName = 'md-search'
               } else if (route.name == 'Scanner') {
                 iconName = 'ios-barcode'
+              } else if (route.name == 'Timesheet') {
+                iconName = 'ios-calendar'
               }
               return <Ionicons name={iconName} color={color} size={size} />
             }
@@ -46,6 +49,10 @@ export default class App extends React.Component {
           <Tab.Screen
             name='Scanner'
             component={BarcodeScanner}
+          />
+          <Tab.Screen
+            name='Timesheet'
+            component={Timesheet}
           />
         </Tab.Navigator>
       </NavigationContainer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Image, StyleSheet, Text, TextInput, Button, Alert, KeyboardAvoidingView } from 'react-native';
 import logo from '../img/transparentLogo.png';
 
 export default class ViewScreen extends React.Component {
@@ -72,7 +72,7 @@ export default class ViewScreen extends React.Component {
         }*/
 
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}>
                 <Image source={logo} style={styles.logoImg} />
                 <Text style={styles.header}>
                     Make your updates
@@ -114,7 +114,7 @@ export default class ViewScreen extends React.Component {
                         />
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
