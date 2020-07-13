@@ -4,6 +4,7 @@ Implement features:
         - Possibly infinite amount of entires, so would have to scroll the screen vertically, this causes performance issues too if theres too much data
     - Make submit button nicer (same one is used across all screens as of now, so make a component)
     - Maybe add Alert to FindLogScreen if log is not found
+    - Add something to logEntry screen after log has been successfully entered
     - Added barcode scanner, works fine but does nothing with data read at this point
     - Test avoidkeyboardview in viewlogscreen
 

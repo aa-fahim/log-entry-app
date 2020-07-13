@@ -5,37 +5,64 @@ import logo from '../img/transparentLogo.png';
 export default class ViewScreen extends React.Component {
     state = {}    
 
-    handleName = (text) => {
+    handleProductName = (text) => {
         if (text == "") {
-            this.setState({name: undefined})
+            this.setState({productName: undefined})
         } else {
-            this.setState({name: text})
+            this.setState({productName: text})
         }
         console.log(this.state)
     }
 
-    handleAge = (text) => {
+    handleLogId = (text) => {
         if (text == "") {
-            this.setState({age: undefined})
+            this.setState({logId: undefined})
         } else {
-            this.setState({age: Number(text)})
+            this.setState({logId: Number(text)})
         }
         console.log(this.state)
     }
 
-    handleHairColor = (text) => {
+    handleDateIn = (text) => {
         if (text == "") {
-            this.setState({hairColor: undefined})
+            this.setState({dateIn: undefined})
         } else {
-            this.setState({hairColor: text})
+            this.setState({dateIn: text})
         }
         console.log(this.state)
     }
 
-    updateData = (nameVal) => {
+    handleDateOut = (text) => {
+        if (text == "") {
+            this.setState({dateOut: undefined})
+        } else {
+            this.setState({dateOut: text})
+        }
+        console.log(this.state)
+    }
+
+    handleEmployeeIn = (text) => {
+        if (text == ""){
+            this.setState({employeeIn: undefined})
+        } else {
+            this.setState({employeeIn: text})
+        }
+        console.log(this.state)
+    }
+
+    handleEmployeeOut = (text) => {
+        if (text == ""){
+            this.setState({employeeOut: undefined})
+        } else {
+            this.setState({employeeOut: text})
+        }
+        console.log(this.state)
+    }
+
+    updateData = (logId) => {
 
         console.log(this.state)
-        let response = fetch('http://192.168.2.33:3000/users/'+nameVal+'', {
+        let response = fetch('http://192.168.2.33:3000/users/'+logId+'', {
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers: {
@@ -50,9 +77,9 @@ export default class ViewScreen extends React.Component {
 
     }
 
-    deleteUser = (nameVal) => {
+    deleteUser = (logId) => {
 
-        fetch('http://192.168.2.33:3000/users/'+nameVal+'', {
+        fetch('http://192.168.2.33:3000/users/'+logId+'', {
             method: 'DELETE'
         }).then(res => 
             res.json()
@@ -77,9 +104,12 @@ export default class ViewScreen extends React.Component {
                 <Text style={styles.header}>
                     Make your updates
                 </Text>
-                <TextInput style={styles.textInput} placeholder={dataVal.name} placeholderTextColor='black' onChangeText={this.handleName} />
-                <TextInput style={styles.textInput} placeholder={dataVal.age.toString()} placeholderTextColor='black' onChangeText={this.handleAge} />
-                <TextInput style={styles.textInput} placeholder={dataVal.hairColor} placeholderTextColor='black' onChangeText={this.handleHairColor} />
+                <TextInput style={styles.textInput} placeholder={dataVal.ProductName} placeholderTextColor='#ABABAB' onChangeText = {this.handleProductName} />
+                <TextInput style={styles.textInput} placeholder={dataVal.LogId.toString()} placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
+                <TextInput style={styles.textInput} placeholder={dataVal.DateIn} placeholderTextColor='#ABABAB' onChangeText = {this.handleDateIn} />
+                <TextInput style={styles.textInput} placeholder={dataVal.DateOut} placeholderTextColor='#ABABAB' onChangeText = {this.handleDateOut} />
+                <TextInput style={styles.textInput} placeholder={dataVal.EmployeeIn} placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeIn} />
+                <TextInput style={styles.textInput} placeholder={dataVal.EmployeeOut} placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeOut} />
                 <View style={styles.buttonsRow}>
                     <View style = {styles.buttonStyle}>
                         <Button

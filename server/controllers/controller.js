@@ -1,6 +1,6 @@
-const User = require("../models/model.js");
+const LogEntry = require("../models/model.js");
 
-// Create and Save a new User
+// Create and Save a new LogEntry
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -9,15 +9,18 @@ exports.create = (req, res) => {
       });
     }
   
-    // Create a User
-    const user = new User({
-      name: req.body.name,
-      age: req.body.age,
-      hairColor: req.body.hairColor
+    // Create a log entry
+    const logEntry = new LogEntry({
+      ProductName: req.body.ProductName,
+      LogId: req.body.LogId,
+      DateIn: req.body.DateIn,
+      DateOut: req.body.DateOut,
+      EmployeeIn: req.body.EmployeeIn,
+      EmployeeOut: req.body.EmployeeOut
     });
   
     // Save User in the database
-    User.create(user, (err, data) => {
+    LogEntry.create(logEntry, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -28,15 +31,15 @@ exports.create = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    User.findByName(req.params.userName, (err, data) => {
+  LogEntry.findByLogId(req.params.logId, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found User with username ${req.params.userName}.`
+            message: `Not found log entry with log Id ${req.params.logId}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving User with username " + req.params.userName
+            message: "Error retrieving log entry with log Id " + req.params.logId
           });
         }
       } else res.send(data);
@@ -51,18 +54,18 @@ exports.update = (req, res) => {
       });
     }
   
-    User.updateByName(
-      req.params.userName,
-      new User(req.body),
+    LogEntry.updateByLogId(
+      req.params.logId,
+      new LogEntry(req.body),
       (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with username ${req.params.userName}.`
+              message: `Not found log entry with log id ${req.params.logId}.`
             });
           } else {
             res.status(500).send({
-              message: "Error updating User with username " + req.params.userName
+              message: "Error updating log entry with log id " + req.params.logId
             });
           }
         } else res.send(data);
@@ -72,17 +75,33 @@ exports.update = (req, res) => {
 
 
 exports.delete = (req, res) => {
-    User.remove(req.params.userName, (err, data) => {
+    LogEntry.remove(req.params.logId, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found User with username ${req.params.userName}.`
+            message: `Not found log entry with log id ${req.params.logId}.`
           });
         } else {
           res.status(500).send({
-            message: "Could not delete User with username " + req.params.userName
+            message: "Could not delete log entry with log id " + req.params.logId
           });
         }
-      } else res.send({ message: `User was deleted successfully!` });
+      } else res.send({ message: `Log entry was deleted successfully!` });
     });
 };
+
+exports.findWithinDateRange = (req, res) => {
+  LogEntry.findByDateRange(req.params.dateRange, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found"){
+        res.status(404).send({
+          message: `Not found any log entries within date range ${req.params.dateRange}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving entries with date range of" + req.params.logId
+        })
+      }
+    } else res.send(data)
+  })
+}
