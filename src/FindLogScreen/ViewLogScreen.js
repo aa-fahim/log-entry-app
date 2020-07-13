@@ -99,7 +99,7 @@ export default class ViewScreen extends React.Component {
         }*/
 
         return (
-            <KeyboardAvoidingView style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior={Platform.OS == "ios" ? "padding" : "height"}>
                 <Image source={logo} style={styles.logoImg} />
                 <Text style={styles.header}>
                     Make your updates

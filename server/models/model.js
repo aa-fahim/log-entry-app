@@ -87,4 +87,23 @@ LogEntry.remove = (logId, result) => {
     });
 };
 
+LogEntry.findByDateRange = (dateRange, result) => {
+  sql.query("SELECT * FROM logentries WHERE DateIn BETWEEN DATE_SUB(CURDATE(), INTERVAL ? DAY)  AND CURDATE()", dateRange, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    } 
+    
+    if (res) {
+      console.log('found log entries: ', res);
+      result(null, res);
+      return;
+    }
+    
+    result({kind: 'not_found'}, null);
+
+  });
+}
+
 module.exports = LogEntry;

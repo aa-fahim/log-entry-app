@@ -39,6 +39,10 @@ export default class App extends React.Component {
           })}
         >
           <Tab.Screen
+            name='Timesheet'
+            component={Timesheet}
+          />
+          <Tab.Screen
             name='Enter Log'
             component={EntryLogScreen}
           />
@@ -49,10 +53,6 @@ export default class App extends React.Component {
           <Tab.Screen
             name='Scanner'
             component={BarcodeScanner}
-          />
-          <Tab.Screen
-            name='Timesheet'
-            component={Timesheet}
           />
         </Tab.Navigator>
       </NavigationContainer>

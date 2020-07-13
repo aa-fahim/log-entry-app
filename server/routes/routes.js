@@ -12,5 +12,8 @@ module.exports = app => {
   
     // Delete a Log Entry with log Id
     app.delete("/logEntry/:logId", logEntry.delete);
+
+    // Retrieve log entries between a date range
+    app.get("/logEntry/date/:dateRange", logEntry.findWithinDateRange)
   
 };

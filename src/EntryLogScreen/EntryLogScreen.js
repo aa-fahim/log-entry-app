@@ -57,7 +57,7 @@ export default class EntryScreen extends React.Component {
                 </Text>
                 <TextInput style={styles.textInput} placeholder="Product Name" placeholderTextColor='#ABABAB' onChangeText = {this.handleProductName} />
                 <TextInput style={styles.textInput} placeholder="Log Id" placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
-                <TextInput style={styles.textInput} placeholder="Date In(YEAR-MM-DD)" placeholderTextColor='#ABABAB' onChangeText = {this.handleDateIn} />
+                <TextInput style={styles.textInput} placeholder="Date (YEAR-MM-DD)" placeholderTextColor='#ABABAB' onChangeText = {this.handleDateIn} />
                 <TextInput style={styles.textInput} placeholder="Employee Name" placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeIn} />
                 <View style={styles.submitButton}>
                     <Button
