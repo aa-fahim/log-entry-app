@@ -25,9 +25,9 @@ export default class App extends React.Component {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
               let iconName
-              if (route.name == 'EntryLog') {
+              if (route.name == 'Enter Log') {
                 iconName = 'ios-create'
-              } else if (route.name == 'FindLogStack') {
+              } else if (route.name == 'Find Log') {
                 iconName = 'md-search'
               } else if (route.name == 'Scanner') {
                 iconName = 'ios-barcode'
@@ -39,20 +39,20 @@ export default class App extends React.Component {
           })}
         >
           <Tab.Screen
-            name='EntryLog'
+            name='Timesheet'
+            component={Timesheet}
+          />
+          <Tab.Screen
+            name='Enter Log'
             component={EntryLogScreen}
           />
           <Tab.Screen
-            name='FindLogStack'
+            name='Find Log'
             component={FindLogStackScreen}
           />
           <Tab.Screen
             name='Scanner'
             component={BarcodeScanner}
-          />
-          <Tab.Screen
-            name='Timesheet'
-            component={Timesheet}
           />
         </Tab.Navigator>
       </NavigationContainer>

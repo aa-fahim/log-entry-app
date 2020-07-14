@@ -4,39 +4,46 @@ import logo from '../img/transparentLogo.png';
 
 export default class EntryScreen extends React.Component {
     state = {
-        name: '',
-        age: '',
-        hairColor: '',
+        productName: '',
+        logId: '',
+        dateIn: '',
+        employeeIn: ''
     }    
 
-    handleName = (text) => {
-        this.setState({name: text})
+    handleProductName = (text) => {
+        this.setState({productName: text})
     }
 
-    handleAge = (text) => {
-        this.setState({age: text})
+    handleLogId = (text) => {
+        this.setState({logId: text})
     }
 
-    handleHairColor = (text) => {
-        this.setState({hairColor: text})
+    handleDateIn = (text) => {
+        this.setState({dateIn: text})
     }
 
-    uploadData = (nameVal, ageVal, hairColorVal) => {
+    handleEmployeeIn = (text) => {
+        this.setState({employeeIn: text})
+    }
 
-        let response = fetch('http://192.168.2.33:3000/users/', {
+    uploadData = (productNameVal, logIdVal, dateInVal, employeeInVal) => {
+
+        let response = fetch('http://192.168.2.33:3000/logEntry/', {
             method: 'POST',
             body: JSON.stringify({
-                    name: nameVal,
-                    age : Number(ageVal),
-                    hairColor : hairColorVal,
-                
+                    ProductName: productNameVal,
+                    LogId: Number(logIdVal),
+                    DateIn: dateInVal,
+                    DateOut: null,
+                    EmployeeIn : employeeInVal,
+                    EmployeeOut: ''
             }),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then(res => 
-            this.props.navigation.navigate('Welcome')
+        }).then( 
+           console.log(this.state)//this.props.navigation.navigate('ViewLog')
         );
 
     }
@@ -48,13 +55,14 @@ export default class EntryScreen extends React.Component {
                 <Text style={styles.header}>
                     Log Form
                 </Text>
-                <TextInput style={styles.textInput} placeholder="Name" placeholderTextColor='#ABABAB' onChangeText = {this.handleName} />
-                <TextInput style={styles.textInput} placeholder="Age" placeholderTextColor='#ABABAB' onChangeText = {this.handleAge} />
-                <TextInput style={styles.textInput} placeholder="Hair Color" placeholderTextColor='#ABABAB' onChangeText = {this.handleHairColor} />
+                <TextInput style={styles.textInput} placeholder="Product Name" placeholderTextColor='#ABABAB' onChangeText = {this.handleProductName} />
+                <TextInput style={styles.textInput} placeholder="Log Id" placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
+                <TextInput style={styles.textInput} placeholder="Date (YEAR-MM-DD)" placeholderTextColor='#ABABAB' onChangeText = {this.handleDateIn} />
+                <TextInput style={styles.textInput} placeholder="Employee Name" placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeIn} />
                 <View style={styles.submitButton}>
                     <Button
                         title='Enter'
-                        onPress={() => this.uploadData(this.state.name, this.state.age, this.state.hairColor)}
+                        onPress={() => this.uploadData(this.state.productName, this.state.logId, this.state.dateIn, this.state.employeeIn)}
                     />
                 </View>
             </View>

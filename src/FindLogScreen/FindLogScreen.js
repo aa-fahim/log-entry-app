@@ -12,7 +12,7 @@ export default class FindScreen extends React.Component {
     }
 
     findData = (IdVal) => {
-        let response = fetch('http://192.168.2.33:3000/users/'+IdVal+'', {
+        let response = fetch('http://192.168.2.33:3000/logEntry/'+IdVal+'', {
             method: 'GET',
         }).then(res => 
             res.json()

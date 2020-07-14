@@ -1,16 +1,19 @@
 module.exports = app => {
-    const users = require("../controllers/controller.js");
+    const logEntry = require("../controllers/controller.js");
   
-    // Create a new User
-    app.post("/users", users.create);
+    // Create a new Log Entry
+    app.post("/logEntry", logEntry.create);
 
-    // Retrieve a single User with userName
-    app.get("/users/:userName", users.findOne);
+    // Retrieve a single Log Entry with log Id
+    app.get("/logEntry/:logId", logEntry.findOne);
 
-    // Update a User with userName
-    app.put("/users/:userName", users.update);
+    // Update a Log Entry with log Id
+    app.put("/logEntry/:logId", logEntry.update);
   
-    // Delete a User with userName
-    app.delete("/users/:userName", users.delete);
+    // Delete a Log Entry with log Id
+    app.delete("/logEntry/:logId", logEntry.delete);
+
+    // Retrieve log entries between a date range
+    app.get("/logEntry/date/:dateRange", logEntry.findWithinDateRange)
   
 };
