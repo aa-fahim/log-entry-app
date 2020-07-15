@@ -1,60 +1,59 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text, TextInput, Button, Alert, KeyboardAvoidingView } from 'react-native';
-import logo from '../img/transparentLogo.png';
+import { View, Image, StyleSheet, Text, TextInput, Button, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 
 export default class ViewScreen extends React.Component {
-    state = {}    
+    state = {}
 
     handleProductName = (text) => {
         if (text == "") {
-            this.setState({productName: undefined})
+            this.setState({ ProductName: undefined })
         } else {
-            this.setState({productName: text})
+            this.setState({ ProductName: text })
         }
         console.log(this.state)
     }
 
     handleLogId = (text) => {
         if (text == "") {
-            this.setState({logId: undefined})
+            this.setState({ logId: undefined })
         } else {
-            this.setState({logId: Number(text)})
+            this.setState({ logId: Number(text) })
         }
         console.log(this.state)
     }
 
     handleDateIn = (text) => {
         if (text == "") {
-            this.setState({dateIn: undefined})
+            this.setState({ DateIn: undefined })
         } else {
-            this.setState({dateIn: text})
+            this.setState({ DateIn: text })
         }
         console.log(this.state)
     }
 
     handleDateOut = (text) => {
         if (text == "") {
-            this.setState({dateOut: undefined})
+            this.setState({ DateOut: undefined })
         } else {
-            this.setState({dateOut: text})
+            this.setState({ DateOut: text })
         }
         console.log(this.state)
     }
 
     handleEmployeeIn = (text) => {
-        if (text == ""){
-            this.setState({employeeIn: undefined})
+        if (text == "") {
+            this.setState({ EmployeeIn: undefined })
         } else {
-            this.setState({employeeIn: text})
+            this.setState({ EmployeeIn: text })
         }
         console.log(this.state)
     }
 
     handleEmployeeOut = (text) => {
-        if (text == ""){
-            this.setState({employeeOut: undefined})
+        if (text == "") {
+            this.setState({ EmployeeOut: undefined })
         } else {
-            this.setState({employeeOut: text})
+            this.setState({ EmployeeOut: text })
         }
         console.log(this.state)
     }
@@ -62,14 +61,14 @@ export default class ViewScreen extends React.Component {
     updateData = (logId) => {
 
         console.log(this.state)
-        let response = fetch('http://192.168.2.33:3000/users/'+logId+'', {
+        let response = fetch('http://192.168.2.33:3000/logEntry/' + logId + '', {
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then(res => 
+        }).then(res =>
             res.json()
         ).then(res =>
             this.props.navigation.navigate('FindLog')
@@ -79,9 +78,9 @@ export default class ViewScreen extends React.Component {
 
     deleteUser = (logId) => {
 
-        fetch('http://192.168.2.33:3000/users/'+logId+'', {
+        fetch('http://192.168.2.33:3000/logEntry/' + logId + '', {
             method: 'DELETE'
-        }).then(res => 
+        }).then(res =>
             res.json()
         ).then(res =>
             this.props.navigation.navigate('FindLog')
@@ -91,81 +90,90 @@ export default class ViewScreen extends React.Component {
 
     render() {
         var { dataVal } = this.props.route.params
-        // for debugging purposes, for when I want to focus on changing something solely on this screen
-        /*var dataVal = {
-            name: "Fahim",
-            age: 24,
-            hairColor: "Black"
-        }*/
 
         return (
-            <KeyboardAvoidingView style={styles.container} behavior={Platform.OS == "ios" ? "padding" : "height"}>
-                <Image source={logo} style={styles.logoImg} />
-                <Text style={styles.header}>
-                    Make your updates
-                </Text>
-                <TextInput style={styles.textInput} placeholder={dataVal.ProductName} placeholderTextColor='#ABABAB' onChangeText = {this.handleProductName} />
-                <TextInput style={styles.textInput} placeholder={dataVal.LogId.toString()} placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
-                <TextInput style={styles.textInput} placeholder={dataVal.DateIn} placeholderTextColor='#ABABAB' onChangeText = {this.handleDateIn} />
-                <TextInput style={styles.textInput} placeholder={dataVal.DateOut} placeholderTextColor='#ABABAB' onChangeText = {this.handleDateOut} />
-                <TextInput style={styles.textInput} placeholder={dataVal.EmployeeIn} placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeIn} />
-                <TextInput style={styles.textInput} placeholder={dataVal.EmployeeOut} placeholderTextColor='#ABABAB' onChangeText = {this.handleEmployeeOut} />
-                <View style={styles.buttonsRow}>
-                    <View style = {styles.buttonStyle}>
-                        <Button
-                            title='Save Changes'
-                            onPress={() => {
-                                (Object.keys(this.state).length === 0 && this.state.constructor === Object) ? 
-                                    (Alert.alert(
-                                        'Warning',
-                                        'No changes have been made!',
-                                        [
-                                            {text: 'Ok'},
-                                            {text: 'Cancel', onPress: () => this.props.navigation.navigate('FindLog')}
-                                        ]
-                                    )):
-                                    (this.updateData(dataVal.name), this.props.navigation.navigate('FindLog'))
-                            }}
-                        />
-                    </View>
-                    <View>
-                        <Button
-                            title='Delete'
-                            onPress= {() => {
-                                Alert.alert(
-                                    'Warning',
-                                    'Are you sure you want to delete?',
-                                    [
-                                        {text: 'Yes', onPress: () => this.deleteUser(dataVal.name)},
-                                        {text: 'No'}
-                                    ]
-                                )}
-                            }
-                        />
-                    </View>
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+
+                <View style={styles.headerContainer}>
+                    <Text style={styles.header}>
+                        Make your updates
+                    </Text>
                 </View>
+
+                <View style={styles.contentContainer}>
+                    <TextInput style={styles.textInput} placeholder={dataVal.ProductName} placeholderTextColor='#ABABAB' onChangeText={this.handleProductName} />
+                    <TextInput style={styles.textInput} placeholder={dataVal.LogId.toString()} placeholderTextColor='#ABABAB' onChangeText={this.handleLogId} />
+                    <TextInput style={styles.textInput} placeholder={dataVal.DateIn} placeholderTextColor='#ABABAB' onChangeText={this.handleDateIn} />
+                    <TextInput style={styles.textInput} placeholder={dataVal.DateOut ? dataVal.DateOut : 'Enter date out here'} placeholderTextColor='#ABABAB' onChangeText={this.handleDateOut} />
+                    <TextInput style={styles.textInput} placeholder={dataVal.EmployeeIn} placeholderTextColor='#ABABAB' onChangeText={this.handleEmployeeIn} />
+                    <TextInput style={styles.textInput} placeholder={dataVal.EmployeeOut ? dataVal.EmployeeOut : 'Enter employee out here'} placeholderTextColor='#ABABAB' onChangeText={this.handleEmployeeOut} />
+
+                    <View style={styles.buttonsRow}>
+
+                        <View style={styles.buttonStyle}>
+                            <Button
+                                title='Save Changes'
+                                onPress={() => {
+                                    (Object.keys(this.state).length === 0 && this.state.constructor === Object) ?
+                                        (Alert.alert(
+                                            'Warning',
+                                            'No changes have been made!',
+                                            [
+                                                { text: 'Ok' },
+                                                { text: 'Cancel', onPress: () => this.props.navigation.navigate('FindLog') }
+                                            ]
+                                        )) :
+                                        (this.updateData(dataVal.LogId), this.props.navigation.navigate('FindLog'))
+                                }}
+                            />
+                        </View>
+
+                        <View>
+                            <Button
+                                title='Delete'
+                                onPress={() => {
+                                    Alert.alert(
+                                        'Warning',
+                                        'Are you sure you want to delete?',
+                                        [
+                                            { text: 'Yes', onPress: () => this.deleteUser(dataVal.LogId) },
+                                            { text: 'No' }
+                                        ]
+                                    )
+                                }
+                                }
+                            />
+                        </View>
+
+                    </View>
+
+                </View>
+                
             </KeyboardAvoidingView>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#4d4d4d',
+
+    headerContainer: {
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#39644f'
+    },
+
+    contentContainer: {
+        flex: 7,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#4d4d4d',
     },
 
     header: {
-        fontSize: 30,
-        marginBottom: 20,
+        fontSize: 50,
         color: '#ABABAB',
-    },
-
-    logoImg: {
-        width: 100,
-        height: 100,
     },
 
     textInput: {

@@ -1,11 +1,16 @@
 Implement features:
     - Make submit button nicer (same one is used across all screens as of now, so make a component)
-    - Maybe add Alert to FindLogScreen if log is not found
-    - Add something to logEntry screen after log has been successfully entered
     - Added barcode scanner, works fine but does nothing with data read at this point
-    - In Viewlogscreen, if dateOut and employeeOut are null/undefined, the textInput for those variable do not show(are blank, and not visible)
-    - I think the sql query getdate, etc messes up the format for the dates in the database
+    - Date is stored in ISO 8064 format so change to Date(limit 10 chars) or change Date to String
+    - You can't change logID and you shouldn't be able to so maybe change that from textInput to text
+    - Table in ios device, the entries do not align properly with the data
 
 NPM RUN DEV TO START SERVER
 Tutorial that helped me build the RESTful APIs, extremely useful
 https://bezkoder.com/node-js-rest-api-express-mysql/#Application_overview
+
+
+Future updates:
+    - Implement Calendar Picker in future updates
+    - Maybe add Alert to FindLogScreen if log is not found
+    - Maybe change EntryResultScreen to an Alert if entry log is successful

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, Button, Image, ScrollView, Text, Platform } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Table, Row, Rows } from 'react-native-table-component';
-import logo from '../img/transparentLogo.png';
 
 export default class TimesheetScreen extends React.Component {
 
@@ -44,20 +43,11 @@ export default class TimesheetScreen extends React.Component {
                     marginTop: 100, alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <Image source={logo} style={styles.logoImg} />
                     <Text style={styles.header}>
                         View previous entries
                     </Text>
 
-                    <View
-                        style={{
-
-                            // The solution: Apply zIndex to any device except Android
-                            ...(Platform.OS !== 'android' && {
-                                zIndex: 1000
-                            })
-
-                        }}
+                    <View style={{...(Platform.OS !== 'android' && {zIndex: 1000})}}
                     >
                         <DropDownPicker
                             items={[
@@ -95,16 +85,12 @@ export default class TimesheetScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#4d4d4d',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-
-    logoImg: {
-        width: 100,
-        height: 100,
     },
 
     header: {

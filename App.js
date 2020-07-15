@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import FindLogStackScreen from './src/FindLogScreen/FindLogStackScreen';
-import EntryLogScreen from './src/EntryLogScreen/EntryLogScreen';
+import EntryLogStackScreen from './src/EntryLogScreen/EntryLogStackScreen';
 import BarcodeScanner from './src/BarcodeScannerScreen/BarcodeScanner';
 import Timesheet from './src/TimesheetScreen/TimesheetScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -39,12 +39,8 @@ export default class App extends React.Component {
           })}
         >
           <Tab.Screen
-            name='Timesheet'
-            component={Timesheet}
-          />
-          <Tab.Screen
             name='Enter Log'
-            component={EntryLogScreen}
+            component={EntryLogStackScreen}
           />
           <Tab.Screen
             name='Find Log'
@@ -53,6 +49,10 @@ export default class App extends React.Component {
           <Tab.Screen
             name='Scanner'
             component={BarcodeScanner}
+          />
+          <Tab.Screen
+            name='Timesheet'
+            component={Timesheet}
           />
         </Tab.Navigator>
       </NavigationContainer>

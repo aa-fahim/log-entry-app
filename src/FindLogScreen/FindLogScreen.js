@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
-import logo from '../img/transparentLogo.png';
 
 export default class FindScreen extends React.Component {
     state = {
@@ -23,40 +22,49 @@ export default class FindScreen extends React.Component {
     
     render() {
         return (
-            <View style={styles.container}>
-                <Image source={logo} style={styles.logoImg} />
-                <Text style={styles.header}>
-                    Update Entry
-                </Text>
-                <TextInput style={styles.textInput} placeholder="Log ID #" placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
-                <View style={styles.submitButton}>
-                    <Button
-                        title='Enter'
-                        onPress = {() => this.findData(this.state.logId)}
-                    />
+            <View style={{flex:1}}>
+
+                <View style={styles.headerContainer}>
+                    <Text style={styles.header}>
+                        Update Entry
+                    </Text>
                 </View>
+
+                <View style={styles.contentContainer}>
+                    <TextInput style={styles.textInput} placeholder="Log ID #" placeholderTextColor='#ABABAB' onChangeText = {this.handleLogId} />
+                    <View style={styles.submitButton}>
+                        <Button
+                            title='Enter'
+                            onPress = {() => this.findData(this.state.logId)}
+                        />
+                    </View>
+                </View>
+
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+
+    headerContainer: { 
+        flex: 3, 
+        alignItems: 'center', 
+        justifyContent:'center', 
+        backgroundColor: '#39644f' 
+    },
+
+    contentContainer: {
+        flex : 7, 
+        alignItems: 'center', 
+        flexDirection:'column', 
+        justifyContent:'center', 
         backgroundColor: '#4d4d4d',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 
     header: {
-        fontSize: 30,
-        marginBottom: 20,
+        fontSize: 50,
         color: '#ABABAB',
-    },
-
-    logoImg: {
-        width: 100,
-        height: 100,
     },
 
     textInput: {
