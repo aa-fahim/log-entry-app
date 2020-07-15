@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Button, Image, ScrollView, Text, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Platform } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Table, Row, Rows } from 'react-native-table-component';
+import AppButton from '../../components/AppButton';
 
 export default class TimesheetScreen extends React.Component {
 
@@ -27,7 +28,7 @@ export default class TimesheetScreen extends React.Component {
         let dataArray = await new Array();
 
         for (let i = 0; i < data.length; i++) {
-            dataArray[i] = await [data[i].ProductName, data[i].LogId, data[i].DateIn, data[i].EmployeeIn, data[i].DateOut, data[i].EmployeeOut]
+            dataArray[i] = await [data[i].ProductName, data[i].LogId, data[i].DateIn.substring(0,10), data[i].EmployeeIn, data[i].DateOut ? data[i].DateOut.substring(0,10) : null, data[i].EmployeeOut]
         }
 
         await this.setState({
@@ -38,22 +39,22 @@ export default class TimesheetScreen extends React.Component {
     render() {
 
         return (
-            <View style={styles.container}>
-                <View style={{
-                    marginTop: 100, alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
+            <View style={{flex:1}}>
+
+                <View style={styles.headerContainer}>
                     <Text style={styles.header}>
                         View previous entries
                     </Text>
+                </View>
 
-                    <View style={{...(Platform.OS !== 'android' && {zIndex: 1000})}}
-                    >
+                <View style={styles.contentContainer}>
+                    <View style={{...(Platform.OS !== 'android' && {zIndex: 1000})}}>
                         <DropDownPicker
                             items={[
                                 { label: 'Yesterday', value: '1' },
                                 { label: 'Last 3 days', value: '3' },
-                                { label: 'Last 7 days', value: '7' }
+                                { label: 'Last 7 days', value: '7' },
+                                { label: 'Last 30 days', value: '30' },
                             ]}
                             defaultIndex={0}
                             placeholder="Pick a time range"
@@ -64,7 +65,7 @@ export default class TimesheetScreen extends React.Component {
                         />
                     </View>
 
-                    <Button
+                    <AppButton
                         title='Show'
                         onPress={() => this.getTableData(this.state.timeRange)}
                     />
@@ -72,8 +73,8 @@ export default class TimesheetScreen extends React.Component {
                     <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1 }} >
                         <View>
                             <Table borderStyle={{ borderWidth: 2, borderColor: '#ABABAB' }} style={{ margin: 20 }}>
-                                <Row data={this.state.tableHead} style={styles.tableHeader} textStyle={styles.rowText} />
-                                <Rows data={this.state.tableData} textStyle={styles.rowText} />
+                                <Row data={this.state.tableHead} style={styles.tableHeader} textStyle={styles.tableHeadText} widthArr={[120, 120, 120, 120, 120, 120]}/>
+                                <Rows data={this.state.tableData} textStyle={styles.rowText} widthArr={[120, 120, 120, 120, 120, 120]}/>
                             </Table>
                         </View>
                     </ScrollView>
@@ -86,21 +87,36 @@ export default class TimesheetScreen extends React.Component {
 
 const styles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-        backgroundColor: '#4d4d4d',
+    headerContainer: {
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#39644f'
+    },
+
+    contentContainer: {
+        flex: 7,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#4d4d4d',
     },
 
     header: {
-        fontSize: 30,
-        marginBottom: 20,
+        fontSize: 50,
         color: '#ABABAB',
+        textAlign: 'center',
     },
 
     tableHeader: {
         height: 40,
+    },
+
+    tableHeadText: {
+        margin: 6,
+        textAlign: 'center',
+        color: '#ABABAB',
+        fontWeight: "900",
     },
 
     rowText: {

@@ -1,16 +1,15 @@
 Implement features:
-    - Make submit button nicer (same one is used across all screens as of now, so make a component)
     - Added barcode scanner, works fine but does nothing with data read at this point
-    - Date is stored in ISO 8064 format so change to Date(limit 10 chars) or change Date to String
     - You can't change logID and you shouldn't be able to so maybe change that from textInput to text
-    - Table in ios device, the entries do not align properly with the data
+    - Change background color of AppButton, change color of TextIputForm placeholder text
 
 NPM RUN DEV TO START SERVER
 Tutorial that helped me build the RESTful APIs, extremely useful
 https://bezkoder.com/node-js-rest-api-express-mysql/#Application_overview
 
-
 Future updates:
     - Implement Calendar Picker in future updates
     - Maybe add Alert to FindLogScreen if log is not found
     - Maybe change EntryResultScreen to an Alert if entry log is successful
+    - Date is stored in ISO 8064 format, so I always have to take first 10 chars in the javascript files, can be slow if theres a lot 
+    of entries in timesheetscreen so find out if I can create a sql query that takes the first 10 chars or change format in mysql database

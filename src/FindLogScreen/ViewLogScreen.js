@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text, TextInput, Button, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, Text, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import TextInputForm from '../../components/TextInputForm';
+import AppButton from '../../components/AppButton';
 
 export default class ViewScreen extends React.Component {
     state = {}
@@ -101,17 +103,16 @@ export default class ViewScreen extends React.Component {
                 </View>
 
                 <View style={styles.contentContainer}>
-                    <TextInput style={styles.textInput} placeholder={dataVal.ProductName} placeholderTextColor='#ABABAB' onChangeText={this.handleProductName} />
-                    <TextInput style={styles.textInput} placeholder={dataVal.LogId.toString()} placeholderTextColor='#ABABAB' onChangeText={this.handleLogId} />
-                    <TextInput style={styles.textInput} placeholder={dataVal.DateIn} placeholderTextColor='#ABABAB' onChangeText={this.handleDateIn} />
-                    <TextInput style={styles.textInput} placeholder={dataVal.DateOut ? dataVal.DateOut : 'Enter date out here'} placeholderTextColor='#ABABAB' onChangeText={this.handleDateOut} />
-                    <TextInput style={styles.textInput} placeholder={dataVal.EmployeeIn} placeholderTextColor='#ABABAB' onChangeText={this.handleEmployeeIn} />
-                    <TextInput style={styles.textInput} placeholder={dataVal.EmployeeOut ? dataVal.EmployeeOut : 'Enter employee out here'} placeholderTextColor='#ABABAB' onChangeText={this.handleEmployeeOut} />
+                    <ScrollView>
+                        <TextInputForm placeholder={dataVal.ProductName} handleFunction={this.handleProductName} />
+                        <TextInputForm placeholder={dataVal.LogId.toString()} handleFunction={this.handleLogId} />
+                        <TextInputForm placeholder={dataVal.DateIn.substring(0, 10)} handleFunction={this.handleDateIn} />
+                        <TextInputForm placeholder={dataVal.DateOut ? dataVal.DateOut.substring(0, 10) : 'Enter date out here'} handleFunction={this.handleDateOut} />
+                        <TextInputForm placeholder={dataVal.EmployeeIn} handleFunction={this.handleEmployeeIn} />
+                        <TextInputForm placeholder={dataVal.EmployeeOut ? dataVal.EmployeeOut : 'Enter employee out here'} handleFunction={this.handleEmployeeOut} />
 
-                    <View style={styles.buttonsRow}>
-
-                        <View style={styles.buttonStyle}>
-                            <Button
+                        <View style={styles.buttonsRow}>
+                            <AppButton
                                 title='Save Changes'
                                 onPress={() => {
                                     (Object.keys(this.state).length === 0 && this.state.constructor === Object) ?
@@ -126,10 +127,8 @@ export default class ViewScreen extends React.Component {
                                         (this.updateData(dataVal.LogId), this.props.navigation.navigate('FindLog'))
                                 }}
                             />
-                        </View>
 
-                        <View>
-                            <Button
+                            <AppButton
                                 title='Delete'
                                 onPress={() => {
                                     Alert.alert(
@@ -140,15 +139,11 @@ export default class ViewScreen extends React.Component {
                                             { text: 'No' }
                                         ]
                                     )
-                                }
-                                }
+                                }}
                             />
                         </View>
-
-                    </View>
-
+                    </ScrollView>
                 </View>
-                
             </KeyboardAvoidingView>
         )
     }
@@ -174,11 +169,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 50,
         color: '#ABABAB',
-    },
-
-    textInput: {
-        marginVertical: 10,
-        color: '#DC9797',
+        textAlign: 'center',
     },
 
     buttonsRow: {

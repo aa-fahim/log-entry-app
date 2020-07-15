@@ -1,12 +1,14 @@
 import React from 'react';
-import { Button, View, Text, TextInput, StyleSheet, Image, Alert } from 'react-native';
+import { Button, View, Text, StyleSheet } from 'react-native';
+import TextInputForm from '../../components/TextInputForm';
+import AppButton from '../../components/AppButton';
 
 export default class EntryScreen extends React.Component {
     state = {
         productName: '',
         logId: '',
         dateIn: '',
-        employeeIn: ''
+        employeeIn: '',
     }
 
     handleProductName = (text) => {
@@ -53,6 +55,7 @@ export default class EntryScreen extends React.Component {
     }
 
     render() {
+        const { isFocused } = this.state;
         return (
             <View style={{flex:1}}>
 
@@ -63,16 +66,13 @@ export default class EntryScreen extends React.Component {
                 </View>
 
                 <View style={styles.contentContainer} >
-                    <TextInput style={styles.textInput} placeholder="Product Name" placeholderTextColor='#ABABAB' onChangeText={this.handleProductName} />
-                    <TextInput style={styles.textInput} placeholder="Log Id" placeholderTextColor='#ABABAB' onChangeText={this.handleLogId} />
-                    <TextInput style={styles.textInput} placeholder="Date (YEAR-MM-DD)" placeholderTextColor='#ABABAB' onChangeText={this.handleDateIn} />
-                    <TextInput style={styles.textInput} placeholder="Employee Name" placeholderTextColor='#ABABAB' onChangeText={this.handleEmployeeIn} />
-                    <View style={styles.submitButton}>
-                        <Button
-                            title='Enter'
-                            onPress={() => this.uploadData(this.state.productName, this.state.logId, this.state.dateIn, this.state.employeeIn)}
-                        />
-                    </View>
+                    <TextInputForm placeholder="Product Name" handleFunction={this.handleProductName}/>
+                    <TextInputForm placeholder="Log Id" handleFunction={this.handleLogId}/>
+                    <TextInputForm placeholder="Date (YYYY-MM-DD)" handleFunction={this.handleDateIn}/>
+                    <TextInputForm placeholder="Employee Name" handleFunction={this.handleEmployeeIn}/>
+
+                    <AppButton title='Enter' onPress={() => this.uploadData(this.state.productName, this.state.logId, this.state.dateIn, this.state.employeeIn)}/>
+
                 </View>
 
             </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 3, 
         alignItems: 'center', 
         justifyContent:'center', 
-        backgroundColor: '#39644f' 
+        backgroundColor: '#000000' 
     },
 
     contentContainer: {
@@ -100,14 +100,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 50,
         color: '#ABABAB',
-    },
-
-    textInput: {
-        margin: 20
-    },
-
-    submitButton: {
-        marginVertical: 10,
+        textAlign: 'center',
     },
 
 });
